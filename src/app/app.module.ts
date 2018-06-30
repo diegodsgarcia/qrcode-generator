@@ -8,6 +8,10 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DetailPage } from '../pages/detail/detail';
 
+// Componentes externos
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,7 +20,8 @@ import { DetailPage } from '../pages/detail/detail';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,7 +32,8 @@ import { DetailPage } from '../pages/detail/detail';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BarcodeScanner
   ]
 })
 export class AppModule {}
