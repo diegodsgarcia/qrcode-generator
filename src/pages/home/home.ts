@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { DetailPage } from '../detail/detail';
+
+import { GamesProvider } from '../../providers/games/games';
 
 @Component({
   selector: 'page-home',
@@ -8,16 +10,14 @@ import { DetailPage } from '../detail/detail';
 })
 export class HomePage {
 
-  games: object[] = [{
-    name: 'Zelda  Breath of the Wild',
-    platform: ['Nintendo Switch']
-  },
-  {
-    name: 'Fortnite',
-    platform: ['PC', 'Xbox One', 'Nintendo Switch', 'Smartphones']
-  }]
+  games: object[] = []
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public gamesProvider: GamesProvider,
+    public navCtrl: NavController,
+    public navParams: NavParams) {
+
+      this.games = this.gamesProvider.games
 
   }
 
@@ -25,11 +25,11 @@ export class HomePage {
     return JSON.stringify(obj)
   }
 
-  convertPlataformToString(plataform) {
-    return plataform.join(' - ')
+  convertPlatformToString(platform) {
+    return platform.join(' - ')
   }
 
-  openDetail(game) {
-    this.navCtrl.push(DetailPage, { game })
+  openDetail(game, index) {
+    this.navCtrl.push(DetailPage, { game, index })
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
+import { GamesProvider } from '../../providers/games/games';
 
 @Component({
   selector: 'page-detail',
@@ -7,23 +8,71 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
   name: string = "";
-  plataform: object[]  = [];
+  platform: object[]  = [];
   qrCode: string = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  switch: boolean;
+  pc: boolean;
+  ps4: boolean;
+  xbox: boolean;
+
+  constructor(
+    public gameProvider: GamesProvider,
+    public navParams: NavParams) {
+  }
+
+  ionViewWillEnter() {
+    const game = this.navParams.get('game')
+
+    if(game) {
+      this.name = game.name;
+      this.platform = game.platform;
+
+      this.updateCheckBoxes(this.platform);
+    }
+  }
+
+  ionViewWillLeave() {
+    const game = {
+      name: this.name,
+      platform: this.platform
+    }
+
+    if(this.navParams.get('game')) {
+      this.gameProvider.update(game, this.navParams.get('index'))
+    } else {
+      this.gameProvider.insert(game)
+    }
   }
 
   createCode() {
-    const qrData = { name: this.name, ...this.plataform };
+    const qrData = { name: this.name, ...this.platform };
     this.qrCode = JSON.stringify(qrData);
   }
 
   updatePlatform(checked, name) {
     if(checked) {
-      this.plataform.push(name)
+      this.platform.push(name);
     } else {
-      this.plataform.splice(this.plataform.indexOf(name), 1)
+      this.platform.splice(this.platform.indexOf(name), 1);
     }
+  }
+
+  updateCheckBoxes(platform) {
+    platform.forEach(name => {
+      if(name === 'Nintendo Switch') {
+        this.switch = true
+      }
+      if(name === 'PC') {
+        this.pc = true
+      }
+      if(name === 'Playstation 4') {
+        this.ps4 = true
+      }
+      if(name === 'Xbox One') {
+        this.xbox = true
+      }
+    })
   }
 }
 

@@ -8,12 +8,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let game of games" (click)="openDetail(game)">
+    <ion-item *ngFor="let game of games;let i = index" (click)="openDetail(game, i)">
       <ion-thumbnail item-start>
         <ngx-qrcode [qrc-value]="convertObjectToString(game)"></ngx-qrcode>
       </ion-thumbnail>
       <h2>{{ game.name }}</h2>
-      <p>{{ convertPlataformToString(game.platform) }}</p>
+      <p>{{ convertPlatformToString(game.platform) }}</p>
     </ion-item>
   </ion-list>
 

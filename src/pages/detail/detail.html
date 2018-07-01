@@ -17,22 +17,22 @@
 
     <ion-item>
       <ion-label>Nintendo Switch</ion-label>
-      <ion-checkbox #switch (ionChange)="updatePlatform(switch.checked, 'Nintendo Switch')"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="switch" (ionChange)="updatePlatform(switch, 'Nintendo Switch')"></ion-checkbox>
     </ion-item>
 
     <ion-item>
       <ion-label>PC</ion-label>
-      <ion-checkbox #pc (ionChange)="updatePlatform(pc.checked, 'PC')"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="pc" (ionChange)="updatePlatform(pc, 'PC')"></ion-checkbox>
     </ion-item>
 
     <ion-item>
       <ion-label>Playstation 4</ion-label>
-      <ion-checkbox #ps4 (ionChange)="updatePlatform(ps4.checked, 'Playstation 4')"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="ps4" (ionChange)="updatePlatform(ps4, 'Playstation 4')"></ion-checkbox>
     </ion-item>
 
     <ion-item>
       <ion-label>Xbox One</ion-label>
-      <ion-checkbox #xbox (ionChange)="updatePlatform(xbox.checked, 'Xbox One')"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="xbox" (ionChange)="updatePlatform(xbox, 'Xbox One')"></ion-checkbox>
     </ion-item>
 
     <ion-list-header>QrCode</ion-list-header>

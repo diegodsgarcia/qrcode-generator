@@ -9,9 +9,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DetailPage } from '../pages/detail/detail';
 
+import { GamesProvider } from '../providers/games/games';
+
 // Componentes externos
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BarcodeScanner,
+    GamesProvider,
+    GamesProvider,
   ]
 })
 export class AppModule {}
