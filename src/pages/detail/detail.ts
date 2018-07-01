@@ -7,7 +7,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
   name: string = "";
-  plataform: object = {};
+  plataform: object[]  = [];
   qrCode: string = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -16,6 +16,14 @@ export class DetailPage {
   createCode() {
     const qrData = { name: this.name, ...this.plataform };
     this.qrCode = JSON.stringify(qrData);
+  }
+
+  updatePlatform(checked, name) {
+    if(checked) {
+      this.plataform.push(name)
+    } else {
+      this.plataform.splice(this.plataform.indexOf(name), 1)
+    }
   }
 }
 
